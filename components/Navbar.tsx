@@ -157,7 +157,7 @@ export default function Navbar() {
 
           {/* CTA Button - Hidden on Mobile/Tablet, Visible on Desktop */}
           <a
-            href="tel:+91744866675"
+            href="tel:+917448866655"
             className="hidden lg:inline-flex items-center justify-center cursor-pointer
                        bg-gradient-to-br from-[#EF3340] to-[#334E9B]
                        text-white px-7 gap-2 py-3
@@ -169,7 +169,7 @@ export default function Navbar() {
             }}
           >
             <PhoneCall size={17} strokeWidth={2.2} /> 
-                 +91744866675
+                 +917448866655
           </a>
 
           {/* Mobile Menu Button - Visible only on Mobile/Tablet */}
@@ -230,11 +230,11 @@ export default function Navbar() {
             style={{
               clipPath: "polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)",
             }}
-            href="tel:+91744866675"
+            href="tel:+917448866655"
             onClick={openBookingForm}
           >
              <PhoneCall size={17} strokeWidth={2.2} /> 
-                 +91744866675
+                 +917448866655
           </a>
         </div>
       </div>

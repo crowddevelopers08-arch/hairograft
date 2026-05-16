@@ -36,7 +36,7 @@ export default function ThankYouPage() {
                   Back to Home
                 </Link>
                 <a
-                  href="tel:+91 744866675"
+                  href="tel:+91 7448866655"
                   className="inline-flex items-center justify-center gap-2 border border-[#334E9B]/20 bg-white px-8 py-4 text-center text-[12px] font-black uppercase tracking-[0.1em] text-[#334E9B] transition-colors duration-200 hover:border-[#EF3340]/40 hover:text-[#EF3340]"
                 >
                   <PhoneCall size={16} />

@@ -287,7 +287,7 @@ export default function PrivacyPolicyPage() {
               <h3>Questions About This Policy?</h3>
               <p>
 
-                Phone: +91 744866675
+                Phone: +91 7448866655
               </p>
             </div>
             <a

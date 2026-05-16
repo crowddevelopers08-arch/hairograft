@@ -27,7 +27,7 @@ export default function Navbar() {
           }}
         >
           <PhoneCall size={17} strokeWidth={2.2} />
-          +91744866675
+          +917448866655
         </button>
       </div>
     </nav>

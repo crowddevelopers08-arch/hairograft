@@ -197,37 +197,71 @@ export default function HairOGraftOverview() {
         .hog2-body {
           max-width: 1160px;
           margin: 0 auto;
-          padding: 72px 48px;
+          padding: 0 48px 72px;
           display: grid;
-          grid-template-columns: 1fr 360px;
+          grid-template-columns: minmax(0, 1fr) 360px;
           gap: 48px;
-          align-items: start;
+          align-items: stretch;
         }
 
         /* differentiator list */
         .hog2-diff-header {
-          margin-bottom: 36px;
+          position: relative;
+          max-width: 600px;
+          margin: 52px auto 40px;
+          padding: 0 24px;
+          text-align: center;
+        }
+
+        .hog2-diff-header::after {
+          content: '';
+          display: block;
+          width: 74px;
+          height: 2px;
+          margin: 20px auto 0;
+          background: linear-gradient(90deg, transparent, #EF3340, #334E9B, transparent);
         }
 
         .hog2-tag {
-          display: inline-block;
-          padding: 4px 12px;
-          background: var(--red-pale);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 12px;
+          padding: 0;
+          border: 0;
+          background: transparent;
           color: var(--red);
           font-size: 10px;
-          font-weight: 800;
-          letter-spacing: 0.18em;
+          font-weight: 900;
+          letter-spacing: 0.16em;
           text-transform: uppercase;
-          margin-bottom: 16px;
+        }
+
+        .hog2-tag::before,
+        .hog2-tag::after {
+          content: '';
+          width: 34px;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(239,51,64,0.8));
+        }
+
+        .hog2-tag::after {
+          background: linear-gradient(90deg, rgba(51,78,155,0.8), transparent);
         }
 
         .hog2-h2 {
-          margin: 0;
-          font-family: 'DM Sans', sans-serif;
-          font-size: clamp(30px, 3.5vw, 34px);
-          font-weight: 700;
+          margin: 0 0 14px;
+          font-family: 'Outfit', sans-serif;
+          font-size: clamp(30px, 3.4vw, 44px);
+          font-weight: 900;
           color: var(--ink);
-          line-height: 1.08;
+          line-height: 1.12;
+          letter-spacing: 0;
+        }
+
+        .hog2-h2 em {
+          color: var(--red);
+          font-style: italic;
         }
 
         .hog2-diff-list {
@@ -237,6 +271,7 @@ export default function HairOGraftOverview() {
           display: flex;
           flex-direction: column;
           gap: 0;
+          height: 100%;
         }
 
         .hog2-diff-item {
@@ -244,6 +279,8 @@ export default function HairOGraftOverview() {
           grid-template-columns: 52px 1fr;
           gap: 0;
           align-items: stretch;
+          flex: 1;
+          min-height: 86px;
           border-top: 1px solid var(--border);
           transition: background 0.2s ease;
         }
@@ -290,12 +327,15 @@ export default function HairOGraftOverview() {
           display: flex;
           flex-direction: column;
           gap: 0;
+          height: 100%;
+          min-height: 430px;
         }
 
         .hog2-img-wrap {
           position: relative;
           width: 100%;
-          aspect-ratio: 4/5;
+          height: 100%;
+          min-height: 430px;
           overflow: hidden;
           background: var(--surface-3);
         }
@@ -411,18 +451,30 @@ export default function HairOGraftOverview() {
             gap: 40px;
           }
 
+          .hog2-diff-header {
+            margin: 48px auto 34px;
+          }
+
           .hog2-usp-card {
             position: static;
+            min-height: 360px;
+          }
+
+          .hog2-img-wrap {
+            min-height: 360px;
           }
         }
 
         @media (max-width: 540px) {
           .hog2-h1 { font-size: 38px; margin: 0 0 14px;}
           .hog2-hero { padding: 44px 20px 44px; }
-          .hog2-body { padding: 40px 20px; }
+          .hog2-body { padding: 0px 20px; padding-bottom: 40px; }
+          .hog2-diff-header { margin: 40px auto 30px; }
           .hog2-usp-stats { grid-template-columns: 1fr; }
           .hog2-usp-quote { font-size: 22px; }
           .hog2-h2 { font-size: 28px; }
+          .hog2-diff-list { height: auto; }
+          .hog2-diff-item { flex: none; min-height: auto; }
         }
       `}</style>
 
@@ -460,15 +512,15 @@ export default function HairOGraftOverview() {
       </div>
 
       {/* ── BODY ── */}
+      <div className="hog2-diff-header hog2-anim">
+        <span className="hog2-tag">Why Choose Us</span>
+        <h3 className="hog2-h2">
+          What Makes Hair O Graft <em>Different?</em>
+        </h3>
+      </div>
       <div className="hog2-body">
         {/* Differentiators */}
         <div>
-          <div className="hog2-diff-header hog2-anim">
-            <span className="hog2-tag">Why Choose Us</span>
-            <h3 className="hog2-h2">
-              What Makes Hair O Graft<br />Different?
-            </h3>
-          </div>
 
           <ul className="hog2-diff-list">
             {differentiators.map((item, i) => (
@@ -484,7 +536,7 @@ export default function HairOGraftOverview() {
         <div className="hog2-usp-card hog2-anim">
           <div className="hog2-img-wrap">
             <img
-              src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=720&q=80&auto=format&fit=crop"
+              src="old-man-sitting-dentistry-room.jpg"
               alt="Hair O Graft — Advanced Hair, Skin & Dental Clinic"
             />
             <div className="hog2-img-overlay" />

@@ -257,7 +257,7 @@ export default function Footer() {
             <div className="footer-contact">
               <div className="contact-card">
                 <div className="contact-label">Phone</div>
-                <div className="contact-value">+91 744866675</div>
+                <div className="contact-value">+91 7448866655</div>
               </div>
               <div className="contact-card">
                 <div className="contact-label">Location</div>

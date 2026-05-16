@@ -89,7 +89,7 @@ export default function HemashreeCertificate() {
         }
       `}</style>
 
-      <div className="doctor-header">
+      <div className="doctor-header max-sm:pt-5 sm:pt-10">
         <div className="doctor-kicker">
           Doctor Profile
         </div>
@@ -102,7 +102,7 @@ export default function HemashreeCertificate() {
         </p> */}
       </div>
 
-      <div className="relative mx-auto grid max-w-6xl items-stretch gap-8 lg:grid-cols-2">
+      <div className="relative mx-auto grid max-w-6xl items-stretch gap-8 lg:grid-cols-2 max-sm:pb-5 sm:pb-10">
         <div className="order-2 flex h-full flex-col justify-center border border-[#334E9B]/15 bg-white/92 p-6 shadow-xl shadow-[#334E9B]/8 backdrop-blur sm:p-8 lg:order-1 lg:p-10">
 
 

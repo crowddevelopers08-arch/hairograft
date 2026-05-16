@@ -176,7 +176,7 @@ export default function ClinicHero() {
 
         .hero-title {
           margin: 0;
-          max-width: 680px;
+          max-width: 700px;
           font-family: 'Outfit', sans-serif;
           font-size: clamp(40px, 5vw, 64px);
           font-weight: 900;
@@ -205,7 +205,7 @@ export default function ClinicHero() {
         .hero-title-rotator {
           display: inline-block;
           position: relative;
-          width: 8.35em;
+          width: 9.1em;
           height: 1.16em;
           margin: 0;
           overflow: hidden;
@@ -219,7 +219,6 @@ export default function ClinicHero() {
           top: 0;
           width: 100%;
           display: block;
-          font-style: italic;
           white-space: nowrap;
           text-align: left;
           opacity: 0;
@@ -549,6 +548,21 @@ export default function ClinicHero() {
         @media (max-width: 680px) {
           .hero-section {
             padding: 92px 16px 24px;
+          }
+
+          .hero-title {
+            font-size: 38px;
+            line-height: 1.02;
+          }
+
+          .hero-title-line {
+            display: block;
+          }
+
+          .hero-title-rotator {
+            width: 100%;
+            max-width: 9.1em;
+            height: 1.18em;
           }
 
           .hero-overlay {
