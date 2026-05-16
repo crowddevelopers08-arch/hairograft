@@ -15,7 +15,7 @@ const outfit = Outfit({
 
 
 export const metadata: Metadata = {
-  title: "Montage Clinic",
+  title: "Hair O Graft",
   description: "Your trusted healthcare partner",
     icons: {
     icon: [
