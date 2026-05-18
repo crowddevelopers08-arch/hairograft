@@ -256,8 +256,7 @@ export default function Footer() {
           <div className="footer-col">
             <h3>Location Map</h3>
             <div className="footer-map">
-              <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.8030038183874!2d80.1863978!3d12.9203794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525df4906847cd%3A0xaf54cd3fabae0c74!2sHair%20O%20Craft%20Advanced%20Hair%20Transplant%20and%20Skin%20Care%20Clinic%20Chennai!5e0!3m2!1sen!2sin!4v1779093007835!5m2!1sen!2sin" 
+              <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d15793.3643832925!2d77.29797765!3d8.268807250000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3a5263e325fff74f%3A0x4413836d8698cdd3!2sHair%20O%20Graft%2C%20256%2C%20New%20Military%20Rd%2C%20opposite%20to%20avadi%20corporation%20office%2C%20Nehru%20Bazaar%2C%20Thirumalai%20Rajapuram%2C%20Avadi%2C%20Chennai%2C%20Tamil%20Nadu%20600054!3m2!1d13.1161572!2d80.1037365!5e0!3m2!1sen!2sin!4v1779093799806!5m2!1sen!2sin"
                 width="600"
                 height="450"
                 allowFullScreen
