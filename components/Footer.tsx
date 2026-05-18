@@ -10,12 +10,6 @@ const footerLinks = [
   { name: "Treatments", href: "#treatments" },
 ];
 
-const services = [
-  "Hair Treatments",
-  "Skin Treatments",
-  "Dental Treatments",
-];
-
 export default function Footer() {
   return (
     <footer className="footer-section">
@@ -116,6 +110,19 @@ export default function Footer() {
           gap: 14px;
         }
 
+        .footer-map {
+          overflow: hidden;
+          border: 1px solid rgba(51,78,155,0.18);
+          background: rgba(255,255,255,0.82);
+        }
+
+        .footer-map iframe {
+          display: block;
+          width: 100%;
+          height: 210px;
+          border: 0;
+        }
+
         .contact-card {
           padding: 15px 16px;
           border: 1px solid rgba(51,78,155,0.18);
@@ -199,6 +206,11 @@ export default function Footer() {
           .footer-contact {
             gap: 5px;
           }
+
+          .footer-map iframe {
+            height: 220px;
+          }
+
           .footer-col h3 {
                 margin: 0 0 8px;
           }
@@ -242,14 +254,18 @@ export default function Footer() {
           </div>
 
           <div className="footer-col">
-            <h3>Treatments</h3>
-            <ul className="footer-list">
-              {services.map((service) => (
-                <li key={service}>
-                  <span>{service}</span>
-                </li>
-              ))}
-            </ul>
+            <h3>Location Map</h3>
+            <div className="footer-map">
+              <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.8030038183874!2d80.1863978!3d12.9203794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525df4906847cd%3A0xaf54cd3fabae0c74!2sHair%20O%20Craft%20Advanced%20Hair%20Transplant%20and%20Skin%20Care%20Clinic%20Chennai!5e0!3m2!1sen!2sin!4v1779093007835!5m2!1sen!2sin" 
+                width="600"
+                height="450"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Hair O Graft location map"
+              />
+            </div>
           </div>
 
           <div className="footer-col">
