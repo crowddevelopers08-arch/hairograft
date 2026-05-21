@@ -2,7 +2,7 @@
 
 import { CalendarCheck, PhoneCall } from "lucide-react";
 
-const PHONE_NUMBER = "+917448866655";
+const PHONE_NUMBER = "+917448866675";
 
 export default function MobilePhoneButton() {
   return (
