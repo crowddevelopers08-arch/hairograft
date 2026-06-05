@@ -15,7 +15,7 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: "Hair O Graft",
-  description: "Your trusted healthcare partner",
+  description: "Hair O Graft is a trusted Hair, Skin & Dental Clinic in Avadi, Chennai, offering personalized care, advanced technology, and long-lasting results to help you look and feel your best.",
   icons: {
     icon: [
       { url: "/image.png", sizes: "any" },
