@@ -9,7 +9,7 @@ const treatmentGroups = [
     image:
       "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1400&q=80",
     summary:
-      "Advanced solutions to control hair fall, restore growth, and improve scalp health.",
+      "Hair O Graft is a trusted Hair, Skin & Dental Clinic in Avadi, Chennai, offering personalized care, advanced technology, and long-lasting results to help you look and feel your best.",
     items: [
       ["PRP (Platelet-Rich Plasma)", "Stimulates natural hair growth using your own blood plasma."],
       ["GFC (Growth Factor Concentrate)", "Advanced therapy that boosts hair strength and density."],
