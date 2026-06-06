@@ -9,9 +9,9 @@ const treatmentCategories = [
     image:
       "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1400&q=80",
     intro:
-      "Advanced solutions to control hair fall, restore growth, and improve scalp health.",
+      "Restore your hair's natural thickness and volume with targeted treatments for every stage of hair loss.",
     treatments: [
-      ["Advanced Hair Regrowth Therapy", "Stimulates natural hair growth using your own blood plasma."],
+      // ["Advanced Hair Regrowth Therapy", "Stimulates natural hair growth using your own blood plasma."],
       ["Natural Hair Support Therapy", "Advanced therapy that boosts hair strength and density."],
       [" UV light Therapy", "Permanent solution to restore hair in thinning areas."],
       ["Hair Regrowth Treatments", "Non-surgical treatments to reduce hair fall and improve thickness."],
