@@ -138,8 +138,17 @@ function isTelecrmConfirmed(data: unknown) {
   if (Array.isArray(record.leadIds) && record.leadIds.length > 0) return true;
   if (record.leadId || record.id || record.LeadID) return true;
 
+  // nested data object (e.g. { success: true, data: { leadId: "..." } })
+  if (record.data && typeof record.data === 'object') {
+    const nested = record.data as Record<string, unknown>;
+    if (nested.leadId || nested.id || nested.LeadID) return true;
+  }
+
+  // boolean success flag
+  if (record.success === true) return true;
+
   const status = String(record.status || '').toLowerCase();
-  return status === 'created' || status === 'updated' || status === 'success';
+  return status === 'created' || status === 'updated' || status === 'success' || status === '200';
 }
 
 async function pushToTeleCRM(body: SubmissionBody): Promise<TelecrmResponse | null> {
@@ -153,22 +162,34 @@ async function pushToTeleCRM(body: SubmissionBody): Promise<TelecrmResponse | nu
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 15000);
 
+  const fields: Record<string, string> = { phone, name: body.name };
+  if (body.email) fields.email = body.email;
+
+  const details = [
+    `Form Name: ${body.source || 'Website'}`,
+    `Name: ${body.name || 'Not specified'}`,
+    `Phone: ${body.phone || 'Not specified'}`,
+    `Email: ${body.email || 'Not specified'}`,
+    `Condition: ${body.concern || 'Not specified'}`,
+    `Appointment DateTime: ${body.appointmentDateTime || 'Not specified'}`,
+    `URL: ${body.pageUrl || 'Not specified'}`,
+  ].join(' | ');
+
   const payload = {
-    fields: {
-      phone,
-      name: body.name,
-    },
+    fields,
     actions: [
-      { type: 'SYSTEM_NOTE', text: `Source: ${body.source || 'Website'}` },
-      { type: 'SYSTEM_NOTE', text: `URL: ${body.pageUrl || 'Not specified'}` },
-      { type: 'SYSTEM_NOTE', text: `Condition: ${body.concern || 'Not specified'}` },
+      { type: 'SYSTEM_NOTE', text: `Details: ${details}` },
+      { type: 'SYSTEM_NOTE', text: `Form Name: ${body.source || 'Website'}` },
+      { type: 'SYSTEM_NOTE', text: `Name: ${body.name || 'Not specified'}` },
+      { type: 'SYSTEM_NOTE', text: `Phone: ${body.phone || 'Not specified'}` },
       { type: 'SYSTEM_NOTE', text: `Email: ${body.email || 'Not specified'}` },
-      {
-        type: 'SYSTEM_NOTE',
-        text: `Appointment DateTime: ${body.appointmentDateTime || 'Not specified'}`,
-      },
+      { type: 'SYSTEM_NOTE', text: `Condition: ${body.concern || 'Not specified'}` },
+      { type: 'SYSTEM_NOTE', text: `Appointment DateTime: ${body.appointmentDateTime || 'Not specified'}` },
+      { type: 'SYSTEM_NOTE', text: `URL: ${body.pageUrl || 'Not specified'}` },
     ],
   };
+
+  console.log('[TeleCRM] Sending payload:', JSON.stringify(payload));
 
   try {
     const res = await fetch(url, {
@@ -186,10 +207,11 @@ async function pushToTeleCRM(body: SubmissionBody): Promise<TelecrmResponse | nu
     clearTimeout(timeout);
 
     if (res.status === 204) {
+      console.log('[TeleCRM] Response: 204 No Content (lead accepted)');
       return {
-        synced: false,
+        synced: true,
         statusCode: 204,
-        note: 'TeleCRM returned 204, no body',
+        note: 'TeleCRM accepted lead (204)',
       };
     }
 
@@ -202,6 +224,7 @@ async function pushToTeleCRM(body: SubmissionBody): Promise<TelecrmResponse | nu
     try {
       data = JSON.parse(text) as TelecrmResponse;
     } catch {
+      console.warn('[TeleCRM] Non-JSON response:', res.status, text.slice(0, 300));
       return {
         synced: false,
         statusCode: res.status,
@@ -209,6 +232,7 @@ async function pushToTeleCRM(body: SubmissionBody): Promise<TelecrmResponse | nu
       };
     }
 
+    console.log('[TeleCRM] Response:', res.status, JSON.stringify(data));
     const confirmed = res.ok && isTelecrmConfirmed(data);
     return {
       ...data,
