@@ -10,6 +10,7 @@ const HEADERS = [
   'Name',
   'Phone',
   'Email',
+  'City',
   'Appointment DateTime',
   'Condition',
   'URL',
@@ -23,6 +24,7 @@ type SubmissionBody = {
   name: string;
   phone: string;
   email: string;
+  location: string;
   appointmentDateTime: string;
   concern: string;
   pageUrl: string;
@@ -45,6 +47,7 @@ function normalizeSubmission(body: Record<string, unknown>): SubmissionBody {
     name: toText(body.name),
     phone: toText(body.phone),
     email: toText(body.email),
+    location: toText(body.location),
     appointmentDateTime: toText(body.appointmentDateTime),
     concern: toText(body.concern) || toText(body.condition),
     pageUrl: toText(body.pageUrl),
@@ -93,6 +96,7 @@ async function pushToSheet(body: SubmissionBody, timestamp: string, telecrmStatu
     body.name,
     body.phone,
     body.email,
+    body.location,
     body.appointmentDateTime,
     body.concern,
     body.pageUrl,
@@ -108,6 +112,7 @@ async function pushToSheet(body: SubmissionBody, timestamp: string, telecrmStatu
       name: body.name,
       phone: body.phone,
       email: body.email,
+      location: body.location,
       appointmentDateTime: body.appointmentDateTime,
       concern: body.concern,
       condition: body.concern,
@@ -164,12 +169,14 @@ async function pushToTeleCRM(body: SubmissionBody): Promise<TelecrmResponse | nu
 
   const fields: Record<string, string> = { phone, name: body.name };
   if (body.email) fields.email = body.email;
+  if (body.location) fields.location = body.location;
 
   const details = [
     `Form Name: ${body.source || 'Website'}`,
     `Name: ${body.name || 'Not specified'}`,
     `Phone: ${body.phone || 'Not specified'}`,
     `Email: ${body.email || 'Not specified'}`,
+    `City: ${body.location || 'Not specified'}`,
     `Condition: ${body.concern || 'Not specified'}`,
     `Appointment DateTime: ${body.appointmentDateTime || 'Not specified'}`,
     `URL: ${body.pageUrl || 'Not specified'}`,
@@ -183,6 +190,7 @@ async function pushToTeleCRM(body: SubmissionBody): Promise<TelecrmResponse | nu
       { type: 'SYSTEM_NOTE', text: `Name: ${body.name || 'Not specified'}` },
       { type: 'SYSTEM_NOTE', text: `Phone: ${body.phone || 'Not specified'}` },
       { type: 'SYSTEM_NOTE', text: `Email: ${body.email || 'Not specified'}` },
+      { type: 'SYSTEM_NOTE', text: `City: ${body.location || 'Not specified'}` },
       { type: 'SYSTEM_NOTE', text: `Condition: ${body.concern || 'Not specified'}` },
       { type: 'SYSTEM_NOTE', text: `Appointment DateTime: ${body.appointmentDateTime || 'Not specified'}` },
       { type: 'SYSTEM_NOTE', text: `URL: ${body.pageUrl || 'Not specified'}` },
@@ -275,6 +283,7 @@ export async function POST(req: NextRequest) {
       body.name,
       body.phone,
       body.email,
+      body.location,
       body.appointmentDateTime,
       body.concern,
       body.pageUrl,

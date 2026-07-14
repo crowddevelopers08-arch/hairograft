@@ -1,4 +1,4 @@
-Timestamp,Source,Name,Phone,Email,Appointment DateTime,Condition,URL,TeleCRM
+Timestamp,Source,Name,Phone,Email,Location,Appointment DateTime,Condition,URL,TeleCRM
 "13/5/2026, 5:32:34 pm",Navbar Booking Modal,testing1,1425367890,testing@gmail.com,2026-05-13T21:32,Aligners / Smile Correction,http://localhost:3000/?name=testing1&phone=3201456987&email=fastestdigitalmarketing8%40gmail.com&treatment=Pigmentation+%2F+Glow+Treatment&appointmentDateTime=2026-05-14T17%3A32,Not configured
 "13/5/2026, 5:35:15 pm",Navbar Booking Modal,testing1,1425367890,johnroserajesh@gmail.com,2026-05-13T17:40,Dental Pain / RCT,http://localhost:3000/,Not configured
 "13/5/2026, 5:42:27 pm",Hero Form Debug,Hero Test,9876543211,hero@example.com,2026-05-13T17:00,PRP / GFC,http://127.0.0.1:3000,Not configured
@@ -16,3 +16,10 @@ Timestamp,Source,Name,Phone,Email,Appointment DateTime,Condition,URL,TeleCRM
 "25/6/2026, 12:27:32 pm",Hero Form,testing1,7412780360,paul@gmail.com,2026-06-25T12:27,Dental Pain / RCT,http://localhost:3001/,TeleCRM did not confirm lead creation
 "25/6/2026, 12:31:44 pm",Hero Form,testing1,9825367890,paul@gmail.com,2026-06-25T12:31,Acne / Skin Treatment,http://localhost:3001/,TeleCRM did not confirm lead creation
 "25/6/2026, 12:36:08 pm",Hero Form,testing2,3201456987,fastestdigitalmarketing8@gmail.com,2026-06-25T12:36,Aligners / Smile Correction,http://localhost:3001/,TeleCRM did not confirm lead creation
+"14/7/2026, 1:29:36 pm",hair-treatment-form,Rajesh Kumar,1425367890,,chennai,,Hair Regrowth,http://localhost:3001/hair-treatment,TeleCRM did not confirm lead creation
+"14/7/2026, 1:38:04 pm",hair-treatment-form,Rajesh Kumars,7854120369,,chennai,,Hair Regrowth,http://localhost:3001/hair-treatment,TeleCRM did not confirm lead creation
+"14/7/2026, 1:44:12 pm",hair-treatment-form,rajesh,7412580360,,chennai,,Hair Regrowth,http://localhost:3001/hair-treatment,TeleCRM did not confirm lead creation
+"14/7/2026, 1:50:38 pm",hair-treatment-form,Rajesh Kumar,1425367890,,chennai,,Extreme Baldness,http://localhost:3001/hair-treatment?name=Rajesh+Kumar&phone=7859641234&location=liuygf&concern=Hair+Regrowth,TeleCRM did not confirm lead creation
+"14/7/2026, 1:53:12 pm",hair-treatment-form,Rajesh Kumar,1425367891,,chennai,,Hair Loss,http://localhost:3001/hair-treatment,TeleCRM did not confirm lead creation
+"14/7/2026, 2:32:41 pm",Hair Treatment Form,Rajesh Kumar,7854120366,,chennai,,Hair Fall,http://localhost:3001/hair-treatment,TeleCRM did not confirm lead creation
+"14/7/2026, 2:33:40 pm",Hero Form,Rajesh Kumar,1425367111,rajeshk@growmedico.com,,2026-07-14T14:33,Dental Pain / RCT,http://localhost:3001/,TeleCRM did not confirm lead creation
