@@ -128,7 +128,7 @@ export default function AboutHealthcare() {
               <CornerBrackets color="blue" />
               <div className="relative h-full min-h-[380px] overflow-hidden rounded-xl">
                 <video
-                  src="https://res.cloudinary.com/jfmvvhot/video/upload/v1783772880/VID-2026_xbayli.mp4"
+                  src="/video-2.mp4"
                   className="absolute inset-0 h-full w-full object-cover object-top"
                   autoPlay
                   loop
