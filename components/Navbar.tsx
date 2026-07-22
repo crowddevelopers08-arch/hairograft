@@ -84,7 +84,7 @@ export default function Navbar() {
     const appointmentDateTime = String(formData.get("appointmentDateTime") ?? "").trim();
     const concern = String(formData.get("treatment") ?? "").trim() || "Not specified";
     const pageUrl = window.location.href;
-    const source = "Pop-up Form";
+    const source = "Hero Form";
 
     try {
       const response = await fetch("/api/submissions", {
