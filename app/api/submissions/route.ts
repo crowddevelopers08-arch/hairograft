@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import * as fs from 'fs';
 import * as path from 'path';
+import { prisma } from '@/lib/prisma';
 
 const DATA_DIR = path.join(process.cwd(), 'data');
 const FILE_PATH = path.join(DATA_DIR, 'submissions.csv');
@@ -13,8 +14,23 @@ const HEADERS = [
   'City',
   'Appointment DateTime',
   'Condition',
+  'Message',
   'URL',
   'TeleCRM',
+];
+
+// Keep the existing Google Sheet columns stable for the two landing-page forms.
+// New contact-form data is added only as the final Message column.
+const SHEET_HEADERS = [
+  'Timestamp',
+  'Source',
+  'Name',
+  'Phone',
+  'Email',
+  'Concern',
+  'URL',
+  'TeleCRM',
+  'Message',
 ];
 
 export const runtime = 'nodejs';
@@ -27,6 +43,7 @@ type SubmissionBody = {
   location: string;
   appointmentDateTime: string;
   concern: string;
+  message: string;
   pageUrl: string;
 };
 
@@ -50,6 +67,7 @@ function normalizeSubmission(body: Record<string, unknown>): SubmissionBody {
     location: toText(body.location),
     appointmentDateTime: toText(body.appointmentDateTime),
     concern: toText(body.concern) || toText(body.condition),
+    message: toText(body.message),
     pageUrl: toText(body.pageUrl),
   };
 }
@@ -96,11 +114,10 @@ async function pushToSheet(body: SubmissionBody, timestamp: string, telecrmStatu
     body.name,
     body.phone,
     body.email,
-    body.location,
-    body.appointmentDateTime,
     body.concern,
     body.pageUrl,
     telecrmStatus,
+    body.message,
   ];
 
   const res = await fetch(url, {
@@ -116,10 +133,11 @@ async function pushToSheet(body: SubmissionBody, timestamp: string, telecrmStatu
       appointmentDateTime: body.appointmentDateTime,
       concern: body.concern,
       condition: body.concern,
+      message: body.message,
       pageUrl: body.pageUrl,
       url: body.pageUrl,
       telecrm: telecrmStatus,
-      headers: HEADERS,
+      headers: SHEET_HEADERS,
       row,
     }),
   });
@@ -178,6 +196,7 @@ async function pushToTeleCRM(body: SubmissionBody): Promise<TelecrmResponse | nu
     `Email: ${body.email || 'Not specified'}`,
     `City: ${body.location || 'Not specified'}`,
     `Condition: ${body.concern || 'Not specified'}`,
+    `Message: ${body.message || 'Not provided'}`,
     `Appointment DateTime: ${body.appointmentDateTime || 'Not specified'}`,
     `URL: ${body.pageUrl || 'Not specified'}`,
   ].join(' | ');
@@ -192,6 +211,7 @@ async function pushToTeleCRM(body: SubmissionBody): Promise<TelecrmResponse | nu
       { type: 'SYSTEM_NOTE', text: `Email: ${body.email || 'Not specified'}` },
       { type: 'SYSTEM_NOTE', text: `City: ${body.location || 'Not specified'}` },
       { type: 'SYSTEM_NOTE', text: `Condition: ${body.concern || 'Not specified'}` },
+      { type: 'SYSTEM_NOTE', text: `Message: ${body.message || 'Not provided'}` },
       { type: 'SYSTEM_NOTE', text: `Appointment DateTime: ${body.appointmentDateTime || 'Not specified'}` },
       { type: 'SYSTEM_NOTE', text: `URL: ${body.pageUrl || 'Not specified'}` },
     ],
@@ -275,8 +295,9 @@ export async function POST(req: NextRequest) {
     }
 
     const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-    const telecrmResult = await pushToTeleCRM(body);
-    const telecrmStatus = getTelecrmStatus(telecrmResult);
+    const isWebsiteLead = body.source === 'website-leads';
+    const telecrmResult = isWebsiteLead ? null : await pushToTeleCRM(body);
+    const telecrmStatus = isWebsiteLead ? 'Not applicable' : getTelecrmStatus(telecrmResult);
     const row = [
       timestamp,
       body.source,
@@ -286,14 +307,17 @@ export async function POST(req: NextRequest) {
       body.location,
       body.appointmentDateTime,
       body.concern,
+      body.message,
       body.pageUrl,
       telecrmStatus,
     ];
 
-    try {
-      appendLocalRow(row);
-    } catch (csvErr) {
-      console.warn('Local CSV save skipped:', (csvErr as Error).message);
+    if (!isWebsiteLead) {
+      try {
+        appendLocalRow(row);
+      } catch (csvErr) {
+        console.warn('Local CSV save skipped:', (csvErr as Error).message);
+      }
     }
 
     let excelStatus = getSheetWebhookUrl() ? 'failed' : 'not_configured';
@@ -306,8 +330,33 @@ export async function POST(req: NextRequest) {
       console.warn('Google Apps Script sync skipped:', excelError);
     }
 
+    let databaseStatus = 'not_applicable';
+    if (isWebsiteLead) {
+      try {
+        await prisma.websiteLead.create({
+          data: {
+            name: body.name,
+            phone: body.phone,
+            email: body.email || null,
+            concern: body.concern,
+            message: body.message || null,
+            pageUrl: body.pageUrl || null,
+            excelStatus,
+          },
+        });
+        databaseStatus = 'saved';
+      } catch (databaseError) {
+        console.error('Website lead database save failed:', databaseError);
+        return NextResponse.json(
+          { success: false, error: 'Unable to save your enquiry. Please try again.' },
+          { status: 500 },
+        );
+      }
+    }
+
     return NextResponse.json({
       success: true,
+      database: databaseStatus,
       excel: excelStatus,
       excelError,
       telecrm: telecrmResult,

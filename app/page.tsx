@@ -1,33 +1,28 @@
-import FaqSection from "@/components/FaqSection";
-import MobileActionBar from "@/components/fat-mobile-action-bar";
-import Footer from "@/components/Footer";
-import HairOGraftOverview from "@/components/HairOGraftOverview";
-import HemashreeCertificate from "@/components/HemashreeCertificate";
-import HeroSection from "@/components/HeroSection";
-import MobilePhoneButton from "@/components/MobilePhoneButton";
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
-import ConsultationStages from "@/components/stage";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import TreatmentShowcase from "@/components/TreatmentShowcase";
-import WhyChooseTreatments from "@/components/WhyChooseTreatments";
+import Footer from "@/components/Footer";
+import ScrollReveal from "@/components/ScrollReveal";
+import HeroCarousel from "@/components/HeroCarousel";
+import AboutSection from "@/components/AboutSection";
+import TreatmentJourneySection from "@/components/TreatmentJourneySection";
+import RoadmapSection from "@/components/RoadmapSection";
+import ConsultationCTASection from "@/components/ConsultationCTASection";
 
-export default function Home() {
-  return(
+
+export default function HomePage() {
+  return (
     <>
-    <MobileActionBar />
-    <MobilePhoneButton />
-    <Navbar />
-    <HeroSection />
-    <ConsultationStages />
-    <HairOGraftOverview />
-    <HemashreeCertificate />
-    <TreatmentShowcase />
-    <WhyChooseTreatments />
-    <TestimonialsSection />
-    <FaqSection />
-    <Footer />
-
-
+      <Navbar />
+      <main className="mt-[76px]">
+        <ScrollReveal>
+          <HeroCarousel />
+          <AboutSection />
+          <TreatmentJourneySection />
+          <RoadmapSection />
+          <ConsultationCTASection />
+        </ScrollReveal>
+      </main>
+      <Footer />
     </>
   );
 }

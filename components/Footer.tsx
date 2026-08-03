@@ -1,291 +1,175 @@
-"use client";
+import Image from "next/image";
+import Link from "next/link";
 
-import EndFooter from "./endfooter";
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+    </svg>
+  );
+}
 
-const footerLinks = [
-  { name: "Home", href: "#" },
-  { name: "About Us", href: "#about" },
-  { name: "Doctor", href: "#doctor" },
-  { name: "Process", href: "#process" },
-  { name: "Treatments", href: "#treatments" },
+function FacebookIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+    </svg>
+  );
+}
+
+function PhoneIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .95h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0120.07 16z" />
+    </svg>
+  );
+}
+
+function MailIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="M2 7l10 7 10-7" />
+    </svg>
+  );
+}
+
+function MapPinIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+}
+
+const services = [
+  { label: "Skin Treatments", items: ["Hydrafacial", "Acne & Scar Removal", "Botox & Fillers", "Carbon Peel", "Glutathione IV"] },
+  { label: "Hair Treatments", items: ["PRP Pro+", "Scalp Micropigmentation", "Micro Blading", "Dandruff Treatment", "GFC"] },
+  { label: "Dental Treatments", items: ["Aligners", "INvisalign", "Root Canal", "Implant", "Dental Crown"] },
 ];
+
 
 export default function Footer() {
   return (
-    <footer className="footer-section">
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700;800&display=swap');
+    <footer className="bg-[#0f1320] text-white">
 
-        .footer-section {
-          position: relative;
-          overflow: hidden;
-          padding: 50px 24px 0;
-          background: linear-gradient(180deg, #eef3ff 0%, #ffffff 100%);
-          color: #111827;
-          font-family: 'DM Sans', sans-serif;
-        }
+      {/* ── Main 5-column grid ── */}
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-10 md:px-16 pt-14 pb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-6">
 
-        .footer-wrap {
-          position: relative;
-          z-index: 1;
-          max-width: 1240px;
-          margin: 0 auto;
-        }
+          {/* ── Col 1: Brand ── */}
+          <div className="flex flex-col gap-5">
+            <div className="flex items-center gap-3">
+              <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-[#354C9C]/50">
+                <Image src="/image.png" alt="Hair O Graft" fill className="object-cover" />
+              </div>
+              <div>
+                <p className="text-white font-extrabold text-[16px] leading-tight">Hair O Graft</p>
+                <p className="text-white/40 text-[10px] tracking-[0.15em] uppercase font-medium">Hair · Skin · Dental</p>
+              </div>
+            </div>
 
-        .footer-main {
-          display: grid;
-          grid-template-columns: minmax(280px, 1.1fr) minmax(160px, 0.55fr) minmax(180px, 0.65fr) minmax(240px, 0.8fr);
-          gap: 34px;
-          padding-bottom: 30px;
-        }
-
-        .footer-brand {
-          max-width: 390px;
-        }
-
-        .footer-logo {
-          width: 86px;
-          height: 86px;
-          object-fit: contain;
-          display: block;
-          margin-bottom: 20px;
-          background: #fff;
-          border: 1px solid rgba(51,78,155,0.22);
-        }
-
-        .footer-title {
-          margin: 0;
-          font-family: 'Outfit', sans-serif;
-          font-size: 34px;
-          line-height: 1;
-          font-weight: 900;
-        }
-
-        .footer-title em {
-          color: #EF3340;
-          font-style: italic;
-        }
-
-        .footer-copy {
-          margin: 18px 0 0;
-          color: rgba(51,65,85,0.72);
-          font-size: 13.5px;
-          line-height: 1.78;
-        }
-
-        .footer-col h3 {
-          margin: 0 0 18px;
-          color: #111827;
-          font-size: 12px;
-          font-weight: 900;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-        }
-
-        .footer-list {
-          display: grid;
-          gap: 12px;
-          margin: 0;
-          padding: 0;
-          list-style: none;
-        }
-
-        .footer-list a,
-        .footer-list span {
-          display: inline-block;
-          color: rgba(51,65,85,0.68);
-          font-size: 13px;
-          line-height: 1.5;
-          text-decoration: none;
-          transition: color 0.2s ease, padding-left 0.2s ease;
-        }
-
-        .footer-list a:hover {
-          color: #EF3340;
-          padding-left: 4px;
-        }
-
-        .footer-contact {
-          display: grid;
-          gap: 14px;
-        }
-
-        .footer-map {
-          overflow: hidden;
-          border: 1px solid rgba(51,78,155,0.18);
-          background: rgba(255,255,255,0.82);
-        }
-
-        .footer-map iframe {
-          display: block;
-          width: 100%;
-          height: 210px;
-          border: 0;
-        }
-
-        .contact-card {
-          padding: 15px 16px;
-          border: 1px solid rgba(51,78,155,0.18);
-          background: rgba(255,255,255,0.82);
-        }
-
-        .contact-label {
-          margin-bottom: 5px;
-          color: #EF3340;
-          font-size: 10px;
-          font-weight: 900;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-        }
-
-        .contact-value {
-          color: #111827;
-          font-size: 13px;
-          line-height: 1.5;
-        }
-
-        .footer-cta {
-          display: inline-flex;
-          justify-content: center;
-          margin-top: 18px;
-          padding: 13px 24px;
-          clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
-          background: linear-gradient(135deg, #EF3340, #334E9B);
-          color: #fff;
-          font-size: 12px;
-          font-weight: 900;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          text-decoration: none;
-          transition: filter 0.2s ease, transform 0.16s ease;
-        }
-
-        .footer-cta:hover {
-          filter: brightness(1.08);
-        }
-
-        .footer-cta:active {
-          transform: scale(0.98);
-        }
-
-        .footer-bottom {
-          display: flex;
-          justify-content: space-between;
-          gap: 18px;
-          align-items: center;
-          padding: 22px 0;
-          border-top: 1px solid rgba(239,51,64,0.16);
-          color: rgba(51,65,85,0.62);
-          font-size: 12px;
-        }
-
-        .footer-bottom strong {
-          color: #111827;
-          font-weight: 800;
-        }
-
-        @media (max-width: 980px) {
-          .footer-main {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-          }
-        }
-
-        @media (max-width: 640px) {
-          .footer-section {
-            padding: 16px 16px 0;
-          }
-
-          .footer-main {
-            grid-template-columns: 1fr;
-            gap: 14px;
-            padding-bottom: 25px;
-          }
-          .footer-list {
-            gap: 6px;
-          }
-          .footer-contact {
-            gap: 5px;
-          }
-
-          .footer-map iframe {
-            height: 220px;
-          }
-
-          .footer-col h3 {
-                margin: 0 0 8px;
-          }
-
-          .footer-bottom {
-            flex-direction: column;
-            align-items: flex-start;
-          }
-        }
-      `}</style>
-
-      <div className="footer-wrap">
-        <div className="footer-main">
-          <div className="footer-brand">
-            <img className="footer-logo" src="/image.png" alt="Hair O Graft" />
-            <h2 className="footer-title">
-              Hair O <em>Graft</em>
-            </h2>
-            <p className="footer-copy">
-              Trusted hair, skin, and dental care with advanced technology,
-              experienced doctors, and personalized treatment plans.
+            <p className="text-white/50 text-[12px] leading-relaxed">
+              Advanced aesthetic & dental clinic in Avadi, Chennai — personalised care for hair, skin, and smile.
             </p>
-            <button
-              className="footer-cta border-0 cursor-pointer"
-              type="button"
-              onClick={() => window.dispatchEvent(new Event("open-booking-modal"))}
-            >
-              Book your Free Consultation
-            </button>
-          </div>
 
-          <div className="footer-col">
-            <h3>Quick Links</h3>
-            <ul className="footer-list">
-              {footerLinks.map((link) => (
-                <li key={link.name}>
-                  <a href={link.href}>{link.name}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="footer-col">
-            <h3>Location Map</h3>
-            <div className="footer-map">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d15793.3643832925!2d77.29797765!3d8.268807250000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3a5263e325fff74f%3A0x4413836d8698cdd3!2sHair%20O%20Graft%2C%20256%2C%20New%20Military%20Rd%2C%20opposite%20to%20avadi%20corporation%20office%2C%20Nehru%20Bazaar%2C%20Thirumalai%20Rajapuram%2C%20Avadi%2C%20Chennai%2C%20Tamil%20Nadu%20600054!3m2!1d13.1161572!2d80.1037365!5e0!3m2!1sen!2sin!4v1779093799806!5m2!1sen!2sin"
-                width="600"
-                height="450"
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Hair O Graft location map"
-              />
+            <div className="flex items-center gap-2.5">
+              <a href="https://www.instagram.com/hairograft/" aria-label="Instagram" target="_blank"
+                className="w-9 h-9 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center
+                           hover:bg-[#FEEA1B] hover:border-[#FEEA1B] hover:text-[#0f1320] text-white/60
+                           transition-all duration-200">
+                <InstagramIcon className="w-3.5 h-3.5" />
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61588733498323" aria-label="Facebook" target="_blank"
+                className="w-9 h-9 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center
+                           hover:bg-[#FEEA1B] hover:border-[#FEEA1B] hover:text-[#0f1320] text-white/60
+                           transition-all duration-200">
+                <FacebookIcon className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
 
-          <div className="footer-col">
-            <h3>Contact</h3>
-            <div className="footer-contact">
-              <div className="contact-card">
-                <div className="contact-label">Phone</div>
-                <div className="contact-value">+91 7448866675</div>
-              </div>
-              <div className="contact-card">
-                <div className="contact-label">Location</div>
-                <div className="contact-value">256, New Military Rd, opposite to avadi corporation office, Nehru Bazaar, Thirumalai Rajapuram, Avadi, Chennai, Tamil Nadu 600054</div>
+          {/* ── Col 2: Contact (all 3 stacked) ── */}
+          <div className="flex flex-col gap-5">
+            <div>
+              <h4 className="text-white font-bold text-[13px] tracking-wide mb-1">Call Us</h4>
+              <div className="w-8 h-[2px] rounded-full bg-[#354C9C] mb-3" />
+              <a href="tel:+917448866675"
+                className="flex items-start gap-2.5 text-white/60 hover:text-white transition-colors text-[13px]">
+                <PhoneIcon className="w-3.5 h-3.5 text-[#354C9C] flex-shrink-0 mt-0.5" />
+                +91 74488 66675
+              </a>
+            </div>
+
+            <div>
+              <h4 className="text-white font-bold text-[13px] tracking-wide mb-1">Email Us</h4>
+              <div className="w-8 h-[2px] rounded-full bg-[#354C9C] mb-3" />
+              <a href="mailto:hairograft@gmail.com"
+                className="flex items-start gap-2.5 text-white/60 hover:text-white transition-colors text-[12px]">
+                <MailIcon className="w-3.5 h-3.5 text-[#354C9C] flex-shrink-0 mt-0.5" />
+                hairograft@gmail.com
+              </a>
+            </div>
+
+            <div>
+              <h4 className="text-white font-bold text-[13px] tracking-wide mb-1">Find Us</h4>
+              <div className="w-8 h-[2px] rounded-full bg-[#354C9C] mb-3" />
+              <div className="flex items-start gap-2.5 text-white/60 text-[12px] leading-relaxed">
+                <MapPinIcon className="w-3.5 h-3.5 text-[#354C9C] flex-shrink-0 mt-0.5" />
+                <span>
+                  25, Nehru Bazaar, Thirumalai Rajapuram,<br />
+                  Kondithope, Avadi,<br />
+                  Chennai — 600054
+                </span>
               </div>
             </div>
+          </div>
+
+          {/* ── Cols 3–5: Services ── */}
+          {services.map((col) => (
+            <div key={col.label} className="flex flex-col gap-4">
+              <div>
+                <h4 className="text-white font-bold text-[13px] tracking-wide mb-1">{col.label}</h4>
+                <div className="w-8 h-[2px] rounded-full bg-[#354C9C]" />
+              </div>
+              <ul className="space-y-2">
+                {col.items.map((item) => (
+                  <li key={item}>
+                    <a href="#" className="text-white/50 hover:text-white text-[12px] transition-colors duration-150 flex items-center gap-2 group">
+                      <span className="w-1 h-1 rounded-full bg-[#354C9C]/60 group-hover:bg-[#FEEA1B] transition-colors flex-shrink-0" />
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+        </div>
+      </div>
+
+      {/* ── Bottom bar ── */}
+      <div className="border-t border-white/[0.07]">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-10 md:px-16 py-5
+                        flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-white/35 text-[11px] sm:text-[12px] font-medium text-center sm:text-left">
+            © 2025 Hair O Graft. All rights reserved.
+          </p>
+          <div className="flex items-center gap-5">
+            {[
+              { label: "Privacy Policy", href: "/privacy-policy" },
+              { label: "Terms of Service", href: "/terms-condition" },
+            ].map(({ label, href }) => (
+              <Link key={label} href={href}
+                className="text-white/35 hover:text-white/70 text-[11px] transition-colors">
+                {label}
+              </Link>
+            ))}
           </div>
         </div>
-
-        <div >
-          <EndFooter />
-        </div> 
       </div>
+
     </footer>
   );
 }
