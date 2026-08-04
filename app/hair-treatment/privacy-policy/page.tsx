@@ -8,7 +8,7 @@ const policySections = [
   },
   {
     title: "How We Use Your Information",
-    text: "Your details are used to respond to enquiries, schedule consultations, share treatment information, improve our services, and provide patient support.",
+    text: "Your details are used to respond to enquirie, schedule consultations, share treatment information, improve our services, and provide patient support.",
   },
   {
     title: "Data Protection",
