@@ -5,6 +5,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Height-based variants used by the influencer landing page so dense sections
+   still fit a single screen on short laptop viewports. Desktop-only: the
+   min-width guard keeps them off the stacked mobile/tablet layouts. */
+@custom-variant short (@media (min-width: 1081px) and (max-height: 820px));
+@custom-variant shorter (@media (min-width: 1081px) and (max-height: 720px));
+
 @theme inline {
   --font-sans: "Inter", sans-serif;
   --font-heading: "Outfit", sans-serif;
