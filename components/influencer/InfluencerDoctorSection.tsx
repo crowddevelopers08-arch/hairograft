@@ -16,13 +16,18 @@ export default function InfluencerDoctorSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 overflow-hidden rounded-[18px] border border-[#EF3340]/30 bg-white shadow-[0_26px_64px_rgba(51,78,155,0.14)] lg:grid-cols-[0.8fr_1.2fr] lg:rounded-3xl">
+        {/* Capped narrower than the 1280px wrap: at full width the copy column
+            stretched into very long measure and the card dwarfed the heading
+            above it. */}
+        <div className="mx-auto grid max-w-[1040px] grid-cols-1 overflow-hidden rounded-[18px] border border-[#EF3340]/30 bg-white shadow-[0_26px_64px_rgba(51,78,155,0.14)] lg:grid-cols-[0.8fr_1.2fr] lg:rounded-3xl">
           {/* min-h lives on the frame; the img is absolute so its intrinsic
               aspect ratio never inflates the grid row. */}
-          <div className="relative min-h-[260px] overflow-hidden border-b border-[#EF3340]/20 bg-[#eef3ff] sm:min-h-[320px] lg:min-h-[300px] lg:border-b-0 lg:border-r">
+          {/* Taller on mobile only: stacked above the copy there, the portrait
+              got a squat letterbox crop. sm/lg keep their previous heights. */}
+          <div className="relative min-h-[400px] overflow-hidden border-b border-[#EF3340]/20 bg-[#eef3ff] sm:min-h-[320px] lg:min-h-[300px] lg:border-b-0 lg:border-r">
             <img
               className="absolute inset-0 h-full w-full object-cover object-[center_26%]"
-              src="/doctor.png"
+              src="/nedoc.png"
               alt="Dr. E. Hema Shree"
               loading="lazy"
             />
@@ -51,14 +56,18 @@ export default function InfluencerDoctorSection() {
               <span className="mt-2 block h-px w-11 bg-[#EF3340]" />
             </h4>
 
-            <ul className="m-0 mb-[15px] flex list-none flex-wrap items-center gap-2 p-0">
+            {/* Chips are tighter than the rest of the card's rhythm so all five
+                steps still hold one line in the narrower column — when they
+                wrap, the separator arrow is left dangling at the end of the
+                first row. */}
+            <ul className="m-0 mb-[15px] flex list-none flex-wrap items-center gap-1.5 p-0">
               {approachSteps.map((step, index) => (
-                <li className="inline-flex items-center gap-2" key={step}>
-                  <span className="inline-flex rounded-full border border-[#EF3340]/30 bg-[#EF3340]/[0.08] px-3 py-2 text-[9px] font-extrabold uppercase tracking-[0.13em] text-[#2B3E80] transition-colors duration-200 hover:border-transparent hover:bg-[#EF3340] hover:text-white sm:px-[17px] sm:py-2.5 sm:text-[10px]">
+                <li className="inline-flex items-center gap-1.5" key={step}>
+                  <span className="inline-flex rounded-full border border-[#EF3340]/30 bg-[#EF3340]/[0.08] px-2.5 py-2 text-[9px] font-extrabold uppercase tracking-[0.09em] text-[#2B3E80] transition-colors duration-200 hover:border-transparent hover:bg-[#EF3340] hover:text-white sm:px-3 sm:py-2.5 sm:text-[9.5px]">
                     {step}
                   </span>
                   {index < approachSteps.length - 1 && (
-                    <span className="text-[13px] font-extrabold text-[#EF3340]/75">→</span>
+                    <span className="text-[12px] font-extrabold text-[#EF3340]/75">→</span>
                   )}
                 </li>
               ))}

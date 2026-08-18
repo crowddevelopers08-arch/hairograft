@@ -151,7 +151,7 @@ export default function ConsultationCTASection() {
                   Visit Us:
                 </p>
                 <p className="mt-1 max-w-[220px] text-[14px] leading-snug text-[#ED3136] sm:text-[15px]">
-                  25, Nehru Bazaar, Avadi, Chennai — 600054
+                  256, New Military Rd, Avadi, Chennai — 600054
                 </p>
               </div>
             </div>

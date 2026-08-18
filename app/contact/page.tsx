@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const contact = {
   email: "hairograft@gmail.com",
   phone: "7448866675",
-  address: "25, Nehru Bazaar, Thirumalai Rajapuram, Kondithope, Avadi, Tamil Nadu 600054",
+  address: "256, New Military Rd, opposite to avadi corporation office, Nehru Bazaar, Thirumalai Rajapuram, Avadi, Chennai, Tamil Nadu 600054",
 };
 
 export default function ContactPage() {

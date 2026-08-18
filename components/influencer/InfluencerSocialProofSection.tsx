@@ -13,7 +13,7 @@ const proofCards = [
     id: "02",
     title: "Creator Experiences",
     meta: "Real visits • Real conversations",
-    image: "/clinic-image-1.png",
+    image: "/modern.png",
   },
   {
     id: "03",

@@ -2,11 +2,19 @@
 
 import { btn, h2, kicker, sectionPad, surface, wrap } from "./theme";
 
+/**
+ * Client-supplied embed. Centred on 13.1156,80.1010 — Avadi, Chennai — with
+ * the clinic address as the query. `!5e1` selects satellite/hybrid tiles.
+ *
+ * (An earlier embed was a `maps/embed?pb=` *directions* string whose viewport
+ * centre was `2d77.297!3d8.268`, i.e. Kanyakumari district, ~600km from the
+ * marker — the pin was right and the camera was wrong.)
+ */
 const MAP_EMBED =
-  "https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d15793.3643832925!2d77.29797765!3d8.268807250000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x3a5263e325fff74f%3A0x4413836d8698cdd3!2sHair%20O%20Graft%2C%20256%2C%20New%20Military%20Rd%2C%20opposite%20to%20avadi%20corporation%20office%2C%20Nehru%20Bazaar%2C%20Thirumalai%20Rajapuram%2C%20Avadi%2C%20Chennai%2C%20Tamil%20Nadu%20600054!3m2!1d13.1161572!2d80.1037365!5e0!3m2!1sen!2sin!4v1779093799806!5m2!1sen!2sin";
+  "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3693.4761456374054!2d80.10103422484397!3d13.115695687213048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1s256%2C%20New%20Military%20Rd%2C%20opposite%20to%20avadi%20corporation%20office%2C%20Nehru%20Bazaar%2C%20Thirumalai%20Rajapuram%2C%20Avadi%2C%20Chennai%2C%20Tamil%20Nadu%20600054!5e1!3m2!1sen!2sin!4v1787050438225!5m2!1sen!2sin";
 
-const MAP_DIRECTIONS =
-  "https://www.google.com/maps/dir/?api=1&destination=Hair+O+Graft,+256,+New+Military+Rd,+opposite+to+avadi+corporation+office,+Nehru+Bazaar,+Thirumalai+Rajapuram,+Avadi,+Chennai,+Tamil+Nadu+600054";
+/** Client-supplied share link for the "Get Directions" button. */
+const MAP_DIRECTIONS = "https://maps.app.goo.gl/as1DmGSFLFYSpb469";
 
 export default function InfluencerLocationSection() {
   return (

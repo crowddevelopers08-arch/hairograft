@@ -13,7 +13,7 @@ const services = [
       "Scalp & Dandruff Treatment",
       "Hair Patch / Cosmetic Solutions",
     ],
-    image: "/images/hair-care.png",
+    image: "/haircare.png",
     icon: "♨",
   },
   {
@@ -27,7 +27,7 @@ const services = [
       "Laser Hair Reduction",
       "Glutathione IV Therapy",
     ],
-    image: "/images/skin-care.png",
+    image: "/skincare.png",
     icon: "♧",
   },
   {
@@ -41,61 +41,64 @@ const services = [
       "Dental Crowns & Bridges",
       "Kids Dentistry & More",
     ],
-    image: "/images/dental-care.png",
+    image: "/dental-care.png",
     icon: "♢",
   },
 ];
 
 export default function CareServicesBanner() {
   return (
-    <section className="w-full bg-[#f8f5f0] px-4 py-8 sm:px-8 md:py-10 lg:px-12 lg:py-12 xl:px-16">
+    <section className="w-full bg-[#f8fbff] px-4 py-8 sm:px-8 md:py-10 lg:px-12 lg:py-12 xl:px-16">
       <div className="mx-auto w-full max-w-[1400px]">
 
         {/* Heading */}
         <div className="mb-8 text-center leading-none md:mb-10 lg:mb-12">
-          <div className="mb-3 text-[12px] font-semibold tracking-[2px] text-[#333] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+          <div className="mb-3 text-[13px] font-bold uppercase tracking-[1.8px] text-[#334E9B] sm:text-[11px] md:text-[12px] lg:text-[13px] xl:text-[14px]">
             COMPLETE CARE FOR YOUR
           </div>
 
-          <h2 className="font-serif text-[32px] leading-[36px] text-[#252525] sm:text-[40px] sm:leading-[44px] md:text-[48px] md:leading-[52px] lg:text-[56px] lg:leading-[60px]">
+          <h2 className="font-serif text-[34px] font-semibold leading-[1.08] tracking-[-0.7px] text-[#111827] sm:text-[31px] md:text-[34px] lg:text-[38px] xl:text-[42px]">
             Hair, Skin &amp; Dental
           </h2>
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-6 md:gap-7 lg:gap-8">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 md:gap-7 xl:grid-cols-3 lg:gap-8">
           {services.map((service, index) => (
             <div
               key={service.title}
               className="
                 group
                 relative
-                h-[190px]
+                min-h-[280px]
                 overflow-hidden
                 rounded-[12px]
                 border
-                border-[#dfd4c5]
-                bg-[#f9f7f3]
+                border-[#EF3340]/25
+                bg-[#ffffff]
                 transition-all
                 duration-300
                 hover:shadow-2xl
                 hover:scale-[1.02]
-                sm:h-[220px]
-                md:h-[250px]
-                lg:h-[280px]
-                xl:h-[300px]
+                sm:min-h-[260px]
+                md:min-h-[270px]
+                lg:min-h-[280px]
+                xl:min-h-[300px]
               "
             >
               {/* Right Side Shadow */}
-              <div className="absolute right-0 top-0 z-10 h-full w-[30%] bg-gradient-to-r from-transparent via-[#f9f7f3]/30 to-[#f9f7f3]/95" />
+              <div className="absolute right-0 top-0 z-10 h-full w-[30%] bg-linear-to-r from-transparent via-[#ffffff]/30 to-[#ffffff]/95" />
 
               {/* Text Content - 50% width */}
               <div
                 className={`
                   relative z-20
                   h-full
-                  w-1/2
+                  w-[64%]
+                  sm:w-[60%]
+                  xl:w-[56%]
                   px-[16px]
+                  pb-[16px]
                   pt-[16px]
                   sm:px-[20px]
                   sm:pt-[20px]
@@ -109,12 +112,12 @@ export default function CareServicesBanner() {
               >
                 <h3
                   className="
-                    mb-[4px]
-                    text-[18px]
+                    mb-[6px]
+                    text-[26px]
                     font-bold
-                    leading-[20px]
+                    leading-[28px]
                     tracking-[-0.5px]
-                    text-[#a66a18]
+                    text-[#EF3340]
                     sm:text-[22px]
                     sm:leading-[24px]
                     md:text-[26px]
@@ -130,12 +133,12 @@ export default function CareServicesBanner() {
 
                 <p
                   className="
-                    mb-[8px]
+                    mb-[10px]
                     whitespace-nowrap
-                    text-[10px]
+                    text-[15px]
                     font-medium
-                    leading-[12px]
-                    text-[#363636]
+                    leading-[18px]
+                    text-[#111827]
                     sm:text-[12px]
                     sm:leading-[14px]
                     md:text-[14px]
@@ -149,29 +152,26 @@ export default function CareServicesBanner() {
                   {service.subtitle}
                 </p>
 
-                <ul className="space-y-[4px] sm:space-y-[5px] md:space-y-[6px] lg:space-y-[7px] xl:space-y-[8px]">
+                <ul className="space-y-[6px] sm:space-y-[5px] md:space-y-[6px] lg:space-y-[7px] xl:space-y-[8px]">
                   {service.items.map((item) => (
                     <li
                       key={item}
                       className="
                         flex
                         items-start
-                        gap-[4px]
-                        whitespace-nowrap
-                        text-[8px]
-                        leading-[10px]
-                        text-[#565656]
-                        sm:text-[10px]
-                        sm:leading-[12px]
-                        md:text-[12px]
-                        md:leading-[14px]
-                        lg:text-[13px]
-                        lg:leading-[15px]
-                        xl:text-[15px]
-                        xl:leading-[17px]
+                        gap-[6px]
+                        text-[13px]
+                        font-medium
+                        leading-[1.3]
+                        text-[#475569]
+                        sm:text-[9px]
+                        sm:leading-[1.2]
+                        md:text-[10px]
+                        lg:text-[11px]
+                        xl:text-[12px]
                       "
                     >
-                      <span className="mt-[1px] text-[7px] text-[#a66a18] sm:text-[8px] md:text-[9px] lg:text-[10px] xl:text-[11px]">
+                      <span className="mt-[2px] text-[11px] text-[#EF3340] sm:text-[8px] md:text-[9px] lg:text-[10px] xl:text-[11px]">
                         ●
                       </span>
 
@@ -183,18 +183,6 @@ export default function CareServicesBanner() {
 
               {/* Person Image - 50% width */}
               <div className="absolute bottom-0 right-0 z-10 h-full w-1/2">
-                <div
-                  className="
-                    absolute
-                    inset-0
-                    bg-gradient-to-r
-                    from-[#f9f7f3]
-                    via-transparent
-                    to-transparent
-                    opacity-80
-                  "
-                />
-
                 <img
                   src={service.image}
                   alt={service.title}
@@ -209,6 +197,8 @@ export default function CareServicesBanner() {
                     object-bottom
                     transition-transform
                     duration-500
+                    [-webkit-mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.35)_30%,black_62%)]
+                    [mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.35)_30%,black_62%)]
                     group-hover:scale-105
                     sm:right-[-12px]
                     md:right-[-14px]
@@ -226,21 +216,21 @@ export default function CareServicesBanner() {
                   right-[10px]
                   z-30
                   flex
-                  h-[36px]
-                  w-[36px]
+                  h-[40px]
+                  w-[40px]
                   items-center
                   justify-center
                   rounded-full
                   border
-                  border-[#d8c7ae]
-                  bg-[#fffdf9]/95
-                  text-[20px]
-                  text-[#a66a18]
+                  border-[#EF3340]/30
+                  bg-[#ffffff]/95
+                  text-[24px]
+                  text-[#EF3340]
                   transition-all
                   duration-300
-                  hover:bg-[#a66a18]
+                  hover:bg-[#EF3340]
                   hover:text-white
-                  hover:border-[#a66a18]
+                  hover:border-[#EF3340]
                   hover:scale-110
                   sm:bottom-[14px]
                   sm:right-[14px]

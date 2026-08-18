@@ -40,7 +40,7 @@ export default function InfluencerWhyChooseSection() {
             Why Do People in the Public Eye Choose{" "}
             <em className="italic text-[#EF3340]">Hair O Graft?</em>
           </h2>
-          <p className={`${copy.onDark} mx-auto max-w-[570px] text-[13.5px] sm:text-[14.5px]`}>
+          <p className={`${copy.onDark} mx-auto max-w-[600px] text-[13.5px] sm:text-[14.5px]`}>
             When your appearance is part of your profession, you need care you can
             confidently rely on.
           </p>

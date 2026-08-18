@@ -68,8 +68,8 @@ export default function MicroneedlingFinalCTASection() {
                   Address
                 </p>
                 <p className="text-white font-medium text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed">
-                  25, Nehru Bazaar, Thirumalai Rajapuram, Kondithope, Avadi,
-                  Chennai, Tamil Nadu 600054
+                  256, New Military Rd, opposite to avadi corporation office,
+                  Nehru Bazaar, Thirumalai Rajapuram, Avadi, Chennai, Tamil Nadu 600054
                 </p>
               </div>
             </div>

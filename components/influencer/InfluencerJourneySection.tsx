@@ -33,7 +33,7 @@ const steps = [
 /** The `»` marker that sits mid-way along each connector. */
 const Chevrons = () => (
   <svg
-    className="flex-none text-[#b58a3c]"
+    className="flex-none text-[#EF3340]"
     width="15"
     height="12"
     viewBox="0 0 15 12"
@@ -76,13 +76,13 @@ export default function InfluencerJourneySection() {
                   aria-hidden="true"
                   className="pointer-events-none absolute left-1/2 top-[30px] hidden w-[calc(100%+18px)] -translate-y-1/2 items-center gap-2 px-[36px] lg:flex"
                 >
-                  <span className="h-0 flex-1 border-t border-dashed border-[#d8c7ae]" />
+                  <span className="h-0 flex-1 border-t border-dashed border-[#EF3340]/30" />
                   <Chevrons />
-                  <span className="h-0 flex-1 border-t border-dashed border-[#d8c7ae]" />
+                  <span className="h-0 flex-1 border-t border-dashed border-[#EF3340]/30" />
                 </span>
               )}
 
-              <span className="relative z-[1] mb-3.5 grid h-[52px] w-[52px] place-items-center rounded-full border border-[#d8c7ae] bg-[#fffdf9] text-[17px] font-extrabold text-[#a66a18] transition-[background-color,color,border-color,transform] duration-300 group-hover:-translate-y-1 group-hover:border-[#b58a3c] group-hover:bg-[#b58a3c] group-hover:text-white lg:mb-[22px] lg:h-[60px] lg:w-[60px] lg:shadow-[0_0_0_6px_#ffffff]">
+              <span className="relative z-[1] mb-3.5 grid h-[52px] w-[52px] place-items-center rounded-full border border-[#EF3340]/35 bg-[#EF3340]/[0.07] text-[17px] font-extrabold text-[#334E9B] transition-[background-color,color,border-color,transform] duration-300 group-hover:-translate-y-1 group-hover:border-transparent group-hover:bg-[#EF3340] group-hover:text-white lg:mb-[22px] lg:h-[60px] lg:w-[60px] lg:shadow-[0_0_0_6px_#ffffff]">
                 {step.id}
               </span>
 
@@ -94,7 +94,7 @@ export default function InfluencerJourneySection() {
           ))}
         </div>
 
-        <div className="mx-auto mt-9 max-w-[720px] border-t border-[#EF3340]/25 pt-6 text-center lg:mt-[52px] lg:pt-[30px]">
+        <div className="mx-auto mt-9 max-w-[720px]pt-6 text-center lg:mt-[16px] lg:pt-[10px]">
           <p className="m-0 text-[clamp(18px,2.4vw,27px)] font-bold italic leading-[1.5] text-[#334E9B]">
             Every great transformation starts with a conversation.
           </p>

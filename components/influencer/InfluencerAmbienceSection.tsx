@@ -32,15 +32,17 @@ const icons = [
 ];
 
 const gallery = [
-  { src: "/clinic-image.png", alt: "Hair O Graft clinic interior", span: "col-span-2 row-span-2" },
+  { src: "/clinic-image.png", alt: "Hair O Graft clinic interior", span: "col-span-2" },
   { src: "/clinic-image-1.png", alt: "Hair O Graft consultation space", span: "" },
-  { src: "/clinic-image-2.png", alt: "Hair O Graft treatment room", span: "" },
+  { src: "/solution-skin.png", alt: "Hair O Graft treatment room", span: "" },
 ];
 
 export default function InfluencerAmbienceSection() {
   return (
     <section className={`relative overflow-hidden ${sectionPad} ${surface.dark}`}>
-      <div className="relative z-[1] mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-11 lg:grid-cols-[1fr_1.06fr] lg:gap-14">
+      {/* items-stretch (not items-center): the gallery column is told to match
+          the copy column's height rather than sitting centred against it. */}
+      <div className="relative z-[1] mx-auto grid max-w-[1280px] grid-cols-1 items-stretch gap-11 lg:grid-cols-[1fr_1.06fr] lg:gap-14">
         <div>
           <div className={`${kicker.leftOnDark} mb-4`}>Clinic Ambience</div>
 
@@ -82,21 +84,32 @@ export default function InfluencerAmbienceSection() {
           </div>
         </div>
 
-        <div className="grid auto-rows-[128px] grid-cols-2 gap-2.5 lg:auto-rows-[172px] lg:gap-3.5 short:auto-rows-[138px] short:gap-[11px] shorter:auto-rows-[116px] shorter:gap-2">
-          {gallery.map((shot) => (
-            <figure
-              className={`group relative overflow-hidden rounded-[14px] border border-[#EF3340]/25 bg-[#131728] shadow-[0_18px_46px_rgba(0,0,0,0.42)] lg:rounded-[18px] ${shot.span}`}
-              key={shot.src}
-            >
-              <img
-                className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.07]"
-                src={shot.src}
-                alt={shot.alt}
-                loading="lazy"
-              />
-              <span className="pointer-events-none absolute inset-0 bg-[#03070f]/35" />
-            </figure>
-          ))}
+        {/* Desktop: this wrapper is the grid item, and its only child is taken
+            out of flow — so it contributes no intrinsic height and the row is
+            sized purely by the copy column. Without that, the images' natural
+            size drove the row and the copy column stretched to match, leaving
+            dead space under the cards. */}
+        <div className="lg:relative">
+          {/* Two rows: hero shot across the top, the pair beneath. The fr
+              tracks divide whatever height the copy column set, so the two
+              columns end level and the bottom images absorb the slack.
+              Mobile keeps fixed px rows — the columns are stacked there. */}
+          <div className="grid grid-cols-2 grid-rows-[266px_168px] gap-2.5 lg:absolute lg:inset-0 lg:grid-rows-[minmax(0,1.62fr)_minmax(0,1fr)] lg:gap-3.5 short:gap-[11px] shorter:gap-2">
+            {gallery.map((shot) => (
+              <figure
+                className={`group relative min-h-0 overflow-hidden rounded-[14px] border border-[#EF3340]/25 bg-[#131728] shadow-[0_18px_46px_rgba(0,0,0,0.42)] lg:rounded-[18px] ${shot.span}`}
+                key={shot.src}
+              >
+                <img
+                  className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.07]"
+                  src={shot.src}
+                  alt={shot.alt}
+                  loading="lazy"
+                />
+                <span className="pointer-events-none absolute inset-0 bg-[#03070f]/35" />
+              </figure>
+            ))}
+          </div>
         </div>
       </div>
     </section>

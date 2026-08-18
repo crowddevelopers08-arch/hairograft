@@ -12,32 +12,48 @@ export default function TrustBanner() {
   ];
 
   return (
-    <section className="w-full overflow-hidden bg-[#f7f0e6] px-3 py-5 sm:px-5 sm:py-7 lg:px-8 lg:py-10">
+    <section className="w-full overflow-hidden bg-[#ffffff]">
       <div
         className="
+          relative
           mx-auto
           flex
           w-full
-          max-w-[1500px]
+          max-w-[1400px]
           flex-col
           overflow-hidden
-          rounded-[10px]
-          bg-[#f8f1e8]
-          shadow-[0_8px_30px_rgba(70,50,30,0.10)]
+          bg-[#ffffff]
           sm:flex-row
-          sm:rounded-[12px]
         "
       >
+        {/* Decorative wash */}
+        <div
+          className="
+            pointer-events-none
+            absolute
+            right-[-160px]
+            top-[-170px]
+            z-0
+            h-[430px]
+            w-[640px]
+            rounded-full
+            bg-[#EF3340]/[0.09]
+            blur-[90px]
+          "
+        />
+        
         {/* =========================================================
-            LEFT IMAGE
+            LEFT IMAGE - Hidden on mobile, visible on sm and up
         ========================================================= */}
         <div
           className="
             relative
+            hidden
             h-[260px]
             w-full
             shrink-0
             overflow-hidden
+            sm:block
             sm:h-[310px]
             sm:w-[38%]
             md:h-[350px]
@@ -45,12 +61,9 @@ export default function TrustBanner() {
             xl:h-[430px]
           "
         >
-          {/* The stock reception shot is cool/blue-branded; the warm filter pulls
-              it into the beige-and-gold palette of this banner so it doesn't
-              read as a foreign blue rectangle. */}
           <img
-            src="/clinic-image-1.png"
-            alt="Hair O Graft clinic reception"
+            src="/consultation.png"
+            alt="Hair O Graft doctor consulting a patient"
             className="
               absolute
               inset-0
@@ -59,24 +72,25 @@ export default function TrustBanner() {
               scale-[1.03]
               object-cover
               object-center
-              [filter:sepia(0.42)_saturate(1.45)_hue-rotate(-8deg)_brightness(1.04)]
             "
           />
 
-          {/* Warm tint to seat the photo in the palette */}
-          <div className="pointer-events-none absolute inset-0 bg-[#b58a3c]/[0.10]" />
+          <div className="pointer-events-none absolute inset-0 bg-[#334E9B]/[0.10]" />
 
-          {/* Soft blend on right edge */}
           <div
             className="
               pointer-events-none
               absolute
               inset-y-0
               right-0
-              w-[16%]
-              bg-gradient-to-l
-              from-[#f8f1e8]/50
-              to-transparent
+              z-30
+              w-[50px]
+              bg-linear-to-r
+              from-transparent
+              via-[#ffffff]/55
+              to-[#ffffff]
+              md:w-[68px]
+              xl:w-[88px]
             "
           />
         </div>
@@ -94,17 +108,16 @@ export default function TrustBanner() {
             flex-col
             justify-center
             overflow-hidden
-            bg-[#f8f1e8]
-            px-8
+            px-6
             py-10
             sm:min-h-0
             sm:w-[42%]
-            sm:px-8
+            sm:px-5
             sm:py-8
-            md:px-10
-            lg:px-12
+            md:px-6
+            lg:px-7
             lg:py-10
-            xl:px-14
+            xl:px-8
           "
         >
           {/* Decorative glow */}
@@ -117,7 +130,7 @@ export default function TrustBanner() {
               h-[230px]
               w-[230px]
               rounded-full
-              bg-[#ead9bf]/25
+              bg-[#EF3340]/[0.10]
               blur-[45px]
             "
           />
@@ -127,12 +140,12 @@ export default function TrustBanner() {
             className="
               relative
               z-10
-              mb-[8px]
-              text-[11px]
+              mb-[10px]
+              text-[13px]
               font-bold
               uppercase
               tracking-[1.8px]
-              text-[#242424]
+              text-[#334E9B]
               sm:text-[11px]
               md:text-[12px]
               lg:text-[13px]
@@ -147,14 +160,13 @@ export default function TrustBanner() {
             className="
               relative
               z-10
-              mb-[13px]
-              whitespace-nowrap
+              mb-[14px]
               font-serif
-              text-[30px]
+              text-[34px]
               font-semibold
               leading-[1.08]
               tracking-[-0.7px]
-              text-[#1d1d1d]
+              text-[#111827]
               sm:text-[31px]
               md:text-[34px]
               lg:text-[38px]
@@ -164,16 +176,44 @@ export default function TrustBanner() {
             Your Trust. Our Responsibility.
           </h2>
 
+          {/* =========================================================
+              MOBILE IMAGE - Visible only on mobile, between heading and para
+          ========================================================= */}
+          <div
+            className="
+              relative
+              z-10
+              mb-[20px]
+              h-[280px]
+              w-full
+              overflow-hidden
+              rounded-[8px]
+              sm:hidden
+            "
+          >
+            <img
+              src="/consultation.png"
+              alt="Hair O Graft doctor consulting a patient"
+              className="
+                h-full
+                w-full
+                object-cover
+                object-center
+              "
+            />
+            <div className="pointer-events-none absolute inset-0 bg-[#334E9B]/[0.10]" />
+          </div>
+
           {/* Description */}
           <p
             className="
               relative
               z-10
-              mb-[17px]
+              mb-[18px]
               max-w-[530px]
-              text-[10px]
+              text-[13px]
               leading-[1.6]
-              text-[#44403c]
+              text-[#475569]
               sm:text-[10px]
               md:text-[11px]
               lg:text-[12px]
@@ -185,15 +225,14 @@ export default function TrustBanner() {
           </p>
 
           {/* Promise Points */}
-          
           <div
             className="
               relative
               z-10
-              mb-[20px]
+              mb-[22px]
               flex
               flex-col
-              gap-[8px]
+              gap-[10px]
               sm:gap-[9px]
               lg:gap-[10px]
             "
@@ -204,18 +243,18 @@ export default function TrustBanner() {
                 className="
                   flex
                   items-center
-                  gap-[7px]
+                  gap-[9px]
                   sm:gap-[8px]
                   lg:gap-[9px]
                 "
               >
                 <CheckCircle2
                   className="
-                    h-[14px]
-                    w-[14px]
+                    h-[18px]
+                    w-[18px]
                     shrink-0
                     stroke-[1.8]
-                    text-[#b4873d]
+                    text-[#EF3340]
                     sm:h-[15px]
                     sm:w-[15px]
                     md:h-[16px]
@@ -229,10 +268,10 @@ export default function TrustBanner() {
 
                 <span
                   className="
-                    text-[9px]
+                    text-[13px]
                     font-medium
                     leading-[1.2]
-                    text-[#3d3d3d]
+                    text-[#475569]
                     sm:text-[9px]
                     md:text-[10px]
                     lg:text-[11px]
@@ -256,20 +295,20 @@ export default function TrustBanner() {
               items-center
               gap-[15px]
               rounded-[4px]
-              bg-[#b58a3c]
-              px-[18px]
-              py-[10px]
-              text-[8px]
+              bg-[#EF3340]
+              px-[22px]
+              py-[13px]
+              text-[11px]
               font-bold
               uppercase
               tracking-[0.7px]
               text-white
-              shadow-[0_4px_10px_rgba(130,90,30,0.18)]
+              shadow-[0_4px_10px_rgba(239,51,64,0.18)]
               transition-all
               duration-300
               hover:-translate-y-[1px]
-              hover:bg-[#9d742e]
-              hover:shadow-[0_6px_15px_rgba(130,90,30,0.25)]
+              hover:bg-[#334E9B]
+              hover:shadow-[0_6px_15px_rgba(239,51,64,0.25)]
               sm:gap-[16px]
               sm:px-[20px]
               sm:py-[11px]
@@ -289,8 +328,8 @@ export default function TrustBanner() {
 
             <ArrowRight
               className="
-                h-[14px]
-                w-[14px]
+                h-[18px]
+                w-[18px]
                 stroke-[1.8]
                 sm:h-[15px]
                 sm:w-[15px]
@@ -316,7 +355,6 @@ export default function TrustBanner() {
             w-[20%]
             shrink-0
             overflow-hidden
-            bg-[#f8f1e8]
             sm:block
             sm:h-[310px]
             md:h-[350px]
@@ -324,56 +362,17 @@ export default function TrustBanner() {
             xl:h-[430px]
           "
         >
-          {/* Doctor — doctors.jpeg is shot against a cream wall, so it melts
-              into the #f8f1e8 panel instead of cutting a hard rectangle the way
-              doctor.png's blue studio backdrop would. Its 0.74 aspect almost
-              matches this column, so object-cover barely crops; object-top
-              guarantees the head stays in frame. */}
           <img
-            src="/doctors.jpeg"
-            alt="Dr. E. Hema Shree"
+            src="/hairodoctor.png"
+            alt="Hair O Graft doctor"
             className="
               absolute
               inset-0
               z-10
               h-full
               w-full
-              object-cover
-              object-top
-              [filter:saturate(0.9)_brightness(1.07)]
-            "
-          />
-
-          {/* Left blend — feathers the photo's cream wall into the panel so the
-              two off-whites meet without a visible vertical seam. Kept clear of
-              her face, which starts around 55% across. */}
-          <div
-            className="
-              pointer-events-none
-              absolute
-              inset-y-0
-              left-0
-              z-20
-              w-[34%]
-              bg-gradient-to-r
-              from-[#f8f1e8]
-              via-[#f8f1e8]/70
-              to-transparent
-            "
-          />
-
-          {/* Right soft blend */}
-          <div
-            className="
-              pointer-events-none
-              absolute
-              inset-y-0
-              right-0
-              z-20
-              w-[8%]
-              bg-gradient-to-l
-              from-[#f8f1e8]/30
-              to-transparent
+              object-contain
+              object-bottom
             "
           />
         </div>

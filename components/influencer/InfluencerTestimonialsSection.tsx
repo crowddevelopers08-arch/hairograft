@@ -11,7 +11,6 @@ const testimonials = [
     tag: "Dental Care",
     rating: 5,
     date: "2 weeks ago",
-    verified: true,
   },
   {
     quote:
@@ -21,7 +20,6 @@ const testimonials = [
     tag: "Hair Care",
     rating: 5,
     date: "1 month ago",
-    verified: true,
   },
   {
     quote: "The treatment helped me address my skin concerns and feel more confident.",
@@ -30,7 +28,6 @@ const testimonials = [
     tag: "Skin Care",
     rating: 5,
     date: "3 weeks ago",
-    verified: true,
   },
   {
     quote:
@@ -40,7 +37,6 @@ const testimonials = [
     tag: "Aligners",
     rating: 5,
     date: "1 week ago",
-    verified: false,
   },
 ];
 
@@ -64,18 +60,6 @@ const StarIcon = ({ filled = true }: { filled?: boolean }) => (
   </svg>
 );
 
-const VerifiedIcon = () => (
-  <svg className="h-4 w-4 text-[#34A853]" fill="currentColor" viewBox="0 0 20 20">
-    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-  </svg>
-);
-
-const GoogleLogo = () => (
-  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="#EA4335"/>
-  </svg>
-);
-
 const RightArrowIcon = () => (
   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -89,10 +73,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
   >
     {/* Google Review Badge */}
     <div className="mb-3 flex items-center justify-between">
-      <div className="flex items-center gap-1.5">
-        <GoogleLogo />
-        <span className="text-xs font-medium text-white/60">Google Review</span>
-      </div>
+      <span className="text-xs font-medium text-white/60">Google Review</span>
       <span className="text-[10px] text-white/40">{testimonial.date}</span>
     </div>
 
@@ -116,12 +97,6 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
       <div className="min-w-0 flex-1">
         <strong className="block truncate text-sm font-semibold leading-tight text-[#fffaf0]">
           {testimonial.name}
-          {testimonial.verified && (
-            <span className="ml-1.5 inline-flex items-center gap-0.5 text-[10px] font-normal text-[#34A853]">
-              <VerifiedIcon />
-              Verified
-            </span>
-          )}
         </strong>
         <span className="text-xs text-white/50">{testimonial.place}</span>
       </div>
@@ -201,7 +176,7 @@ export default function InfluencerTestimonialsSection() {
             href="#"
             className="inline-flex items-center gap-2 rounded-full bg-white/5 px-6 py-3 text-sm font-medium text-white/70 transition-all duration-300 hover:bg-white/10 hover:text-white"
           >
-            <GoogleLogo />
+            <GoogleIcon />
             Read all reviews on Google
             <RightArrowIcon />
           </a>

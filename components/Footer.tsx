@@ -118,8 +118,9 @@ export default function Footer() {
               <div className="flex items-start gap-2.5 text-white/60 text-[12px] leading-relaxed">
                 <MapPinIcon className="w-3.5 h-3.5 text-[#354C9C] flex-shrink-0 mt-0.5" />
                 <span>
-                  25, Nehru Bazaar, Thirumalai Rajapuram,<br />
-                  Kondithope, Avadi,<br />
+                  256, New Military Rd, opposite to avadi<br />
+                  corporation office, Nehru Bazaar,<br />
+                  Thirumalai Rajapuram, Avadi,<br />
                   Chennai — 600054
                 </span>
               </div>

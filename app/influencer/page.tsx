@@ -34,18 +34,24 @@ export default function InfluencerPage() {
       {/* 01 */} <InfluencerHero />
       <InfluencerVideoSection />
       {/* 02 */} <InfluencerTrustSection />
-      {/* 03 */} <InfluencerSocialProofSection />
+      <InfluencerCareCategoriesSection />
+      {/* 03 */} 
       {/* 04 */} <InfluencerBrandAuthoritySection />
-      {/* 06–08 */} <InfluencerCareCategoriesSection />
-      {/* 09 */} <InfluencerAmbienceSection />
+      <InfluencerJourneySection />
+      <InfluencerAmbienceSection />
+      {/* 06–08 */} 
+      {/* 09 */} 
       {/* 10 */} <InfluencerDoctorSection />
-      {/* 11 */}
       {/* 13 */} <InfluencerTestimonialsSection />
-      {/* 14 */} <InfluencerJourneySection />
-      {/* 15 */}
+      {/* 14 */} 
       {/* 16 */} <InfluencerFinalCtaSection />
       {/* 17 */} <InfluencerLocationSection />
       {/* 18 */} <InfluencerFooter />
+
+      {/* Clearance for the fixed mobile action bar (~70px tall, md:hidden).
+          Without it the bar sits on top of the footer's last row — the
+          Privacy Policy / Terms links were unreachable on phones. */}
+      <div aria-hidden className="h-[78px] md:hidden" />
     </>
   );
 }
