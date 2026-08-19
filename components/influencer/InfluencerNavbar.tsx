@@ -21,6 +21,34 @@ const navLinks = [
 const FIELD =
   "w-full rounded-[10px] border border-[#111827]/15 bg-white px-3.5 py-3 text-[14px] text-[#111827] outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-slate-400 focus:border-[#EF3340]/70 focus:shadow-[0_0_0_3px_rgba(239,51,64,0.14)]";
 
+// 12-hour slots only — the clinic never quotes railway (24-hour) time to patients.
+const APPOINTMENT_TIME_SLOTS = [
+  "10:00 AM",
+  "10:30 AM",
+  "11:00 AM",
+  "11:30 AM",
+  "12:00 PM",
+  "12:30 PM",
+  "01:00 PM",
+  "01:30 PM",
+  "02:00 PM",
+  "02:30 PM",
+  "03:00 PM",
+  "03:30 PM",
+  "04:00 PM",
+  "04:30 PM",
+  "05:00 PM",
+  "05:30 PM",
+  "06:00 PM",
+  "06:30 PM",
+];
+
+function todayISODate() {
+  const now = new Date();
+  const offsetted = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+  return offsetted.toISOString().slice(0, 10);
+}
+
 const CTA_PILL =
   "inline-flex flex-none cursor-pointer items-center gap-2.5 rounded-full bg-[#EF3340] px-6 py-3 text-[11.5px] font-extrabold tracking-[0.06em] text-white no-underline shadow-[0_10px_26px_rgba(239,51,64,0.28)] transition-[filter,transform,box-shadow] duration-200 hover:brightness-110 hover:shadow-[0_14px_32px_rgba(239,51,64,0.42)] active:scale-[0.98]";
 
@@ -48,7 +76,7 @@ export default function InfluencerNavbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-  const [bookingAppointmentDateTime, setBookingAppointmentDateTime] = useState("");
+  const [bookingAppointmentDate, setBookingAppointmentDate] = useState("");
   const [submissionState, setSubmissionState] = useState<{
     status: "idle" | "submitting" | "success" | "error";
     message: string;
@@ -80,10 +108,11 @@ export default function InfluencerNavbar() {
     const name = String(formData.get("name") ?? "").trim();
     const phone = String(formData.get("phone") ?? "").trim();
     const email = String(formData.get("email") ?? "").trim();
-    const appointmentDateTime = String(formData.get("appointmentDateTime") ?? "").trim();
+    const appointmentDate = String(formData.get("appointmentDate") ?? "").trim();
+    const appointmentTime = String(formData.get("appointmentTime") ?? "").trim();
     const concern = String(formData.get("treatment") ?? "").trim() || "Not specified";
     const pageUrl = window.location.href;
-    const source = "Influencer LP Modal";
+    const source = "Influencer Form";
 
     try {
       const response = await fetch("/api/submissions", {
@@ -94,7 +123,8 @@ export default function InfluencerNavbar() {
           name,
           phone,
           email,
-          appointmentDateTime,
+          appointmentDate,
+          appointmentTime,
           concern,
           condition: concern,
           pageUrl,
@@ -112,8 +142,8 @@ export default function InfluencerNavbar() {
         message: "Your consultation request was submitted successfully.",
       });
       form.reset();
-      setBookingAppointmentDateTime("");
-      window.location.assign("/thank-you");
+      setBookingAppointmentDate("");
+      window.location.assign("/influencer/thank-you");
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       setSubmissionState({ status: "error", message: message || "Submission failed." });
@@ -241,7 +271,7 @@ export default function InfluencerNavbar() {
               placeholder="Email"
               type="email"
             />
-            <select className={FIELD} name="treatment" defaultValue="">
+            <select className={`${FIELD} sm:col-span-2`} name="treatment" defaultValue="">
               <option value="" disabled>
                 Treatment
               </option>
@@ -250,22 +280,38 @@ export default function InfluencerNavbar() {
               <option>Dental Care</option>
             </select>
             <div className="relative">
-              {!bookingAppointmentDateTime && (
+              {!bookingAppointmentDate && (
                 <span className="pointer-events-none absolute left-3.5 top-1/2 z-[1] -translate-y-1/2 text-[14px] text-slate-400">
                   Appointment Date
                 </span>
               )}
               <input
                 className={`${FIELD} ${
-                  bookingAppointmentDateTime ? "" : "text-transparent focus:text-[#111827]"
+                  bookingAppointmentDate ? "" : "text-transparent focus:text-[#111827]"
                 }`}
-                name="appointmentDateTime"
-                type="datetime-local"
-                aria-label="Appointment Date and Time"
-                value={bookingAppointmentDateTime}
-                onChange={(event) => setBookingAppointmentDateTime(event.target.value)}
+                name="appointmentDate"
+                type="date"
+                min={todayISODate()}
+                aria-label="Appointment Date"
+                value={bookingAppointmentDate}
+                onChange={(event) => setBookingAppointmentDate(event.target.value)}
               />
             </div>
+            <select
+              className={FIELD}
+              name="appointmentTime"
+              defaultValue=""
+              aria-label="Appointment Time"
+            >
+              <option value="" disabled>
+                Appointment Time
+              </option>
+              {APPOINTMENT_TIME_SLOTS.map((slot) => (
+                <option key={slot} value={slot}>
+                  {slot}
+                </option>
+              ))}
+            </select>
           </div>
 
           <button

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import * as fs from 'fs';
 import * as path from 'path';
-import { prisma } from '@/lib/prisma';
+import { getPrisma } from '@/lib/prisma';
 
 const DATA_DIR = path.join(process.cwd(), 'data');
 const FILE_PATH = path.join(DATA_DIR, 'submissions.csv');
@@ -41,6 +41,8 @@ type SubmissionBody = {
   phone: string;
   email: string;
   location: string;
+  appointmentDate: string;
+  appointmentTime: string;
   appointmentDateTime: string;
   concern: string;
   message: string;
@@ -58,14 +60,64 @@ function toText(value: unknown): string {
   return typeof value === 'string' ? value.trim() : '';
 }
 
+const MONTHS = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+
+// "2026-08-20" -> "20 Aug 2026". Anything else is passed through untouched.
+function formatAppointmentDate(value: string): string {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (!match) return value;
+
+  const [, year, month, day] = match;
+  const monthName = MONTHS[Number(month) - 1] ?? month;
+  return `${day} ${monthName} ${year}`;
+}
+
+// Always store 12-hour time. "14:30" -> "02:30 PM"; "02:30 PM" is kept as-is.
+function formatAppointmentTime(value: string): string {
+  if (!value) return '';
+  if (/[ap]\.?m\.?$/i.test(value)) return value.toUpperCase().replace(/\./g, '');
+
+  const match = /^(\d{1,2}):(\d{2})/.exec(value);
+  if (!match) return value;
+
+  const hours = Number(match[1]);
+  const minutes = match[2];
+  const suffix = hours >= 12 ? 'PM' : 'AM';
+  const hour12 = hours % 12 === 0 ? 12 : hours % 12;
+  return `${String(hour12).padStart(2, '0')}:${minutes} ${suffix}`;
+}
+
 function normalizeSubmission(body: Record<string, unknown>): SubmissionBody {
+  // Older forms still send a single datetime-local value — split it so every
+  // downstream integration sees a separate date and a separate 12-hour time.
+  const combined = toText(body.appointmentDateTime);
+  const [combinedDate = '', combinedTime = ''] = combined.split(/[T ]/);
+
+  const appointmentDate = formatAppointmentDate(toText(body.appointmentDate) || combinedDate);
+  const appointmentTime = formatAppointmentTime(toText(body.appointmentTime) || combinedTime);
+
   return {
     source: toText(body.source) || 'Consultation Modal',
     name: toText(body.name),
     phone: toText(body.phone),
     email: toText(body.email),
     location: toText(body.location),
-    appointmentDateTime: toText(body.appointmentDateTime),
+    appointmentDate,
+    appointmentTime,
+    appointmentDateTime: [appointmentDate, appointmentTime].filter(Boolean).join(' '),
     concern: toText(body.concern) || toText(body.condition),
     message: toText(body.message),
     pageUrl: toText(body.pageUrl),
@@ -130,6 +182,8 @@ async function pushToSheet(body: SubmissionBody, timestamp: string, telecrmStatu
       phone: body.phone,
       email: body.email,
       location: body.location,
+      appointmentDate: body.appointmentDate,
+      appointmentTime: body.appointmentTime,
       appointmentDateTime: body.appointmentDateTime,
       concern: body.concern,
       condition: body.concern,
@@ -197,7 +251,8 @@ async function pushToTeleCRM(body: SubmissionBody): Promise<TelecrmResponse | nu
     `City: ${body.location || 'Not specified'}`,
     `Condition: ${body.concern || 'Not specified'}`,
     `Message: ${body.message || 'Not provided'}`,
-    `Appointment DateTime: ${body.appointmentDateTime || 'Not specified'}`,
+    `Appointment Date: ${body.appointmentDate || 'Not specified'}`,
+    `Appointment Time: ${body.appointmentTime || 'Not specified'}`,
     `URL: ${body.pageUrl || 'Not specified'}`,
   ].join(' | ');
 
@@ -212,7 +267,8 @@ async function pushToTeleCRM(body: SubmissionBody): Promise<TelecrmResponse | nu
       { type: 'SYSTEM_NOTE', text: `City: ${body.location || 'Not specified'}` },
       { type: 'SYSTEM_NOTE', text: `Condition: ${body.concern || 'Not specified'}` },
       { type: 'SYSTEM_NOTE', text: `Message: ${body.message || 'Not provided'}` },
-      { type: 'SYSTEM_NOTE', text: `Appointment DateTime: ${body.appointmentDateTime || 'Not specified'}` },
+      { type: 'SYSTEM_NOTE', text: `Appointment Date: ${body.appointmentDate || 'Not specified'}` },
+      { type: 'SYSTEM_NOTE', text: `Appointment Time: ${body.appointmentTime || 'Not specified'}` },
       { type: 'SYSTEM_NOTE', text: `URL: ${body.pageUrl || 'Not specified'}` },
     ],
   };
@@ -333,7 +389,7 @@ export async function POST(req: NextRequest) {
     let databaseStatus = 'not_applicable';
     if (isWebsiteLead) {
       try {
-        await prisma.websiteLead.create({
+        await getPrisma().websiteLead.create({
           data: {
             name: body.name,
             phone: body.phone,

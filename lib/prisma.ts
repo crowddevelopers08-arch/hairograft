@@ -16,6 +16,15 @@ function createPrismaClient() {
   return new PrismaClient({ adapter });
 }
 
-export const prisma = globalForPrisma.prisma ?? createPrismaClient();
+/*
+ * Built on first use, not on import: only the website contact form needs the
+ * database, so a missing DATABASE_URL or an ungenerated client must not break
+ * the landing-page forms that just push to TeleCRM and the Google Sheet.
+ */
+export function getPrisma(): PrismaClient {
+  if (!globalForPrisma.prisma) {
+    globalForPrisma.prisma = createPrismaClient();
+  }
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+  return globalForPrisma.prisma;
+}

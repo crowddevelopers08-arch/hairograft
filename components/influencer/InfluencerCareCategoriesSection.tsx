@@ -48,7 +48,10 @@ const services = [
 
 export default function CareServicesBanner() {
   return (
-    <section className="w-full bg-[#f8fbff] px-4 py-8 sm:px-8 md:py-10 lg:px-12 lg:py-12 xl:px-16">
+    <section
+      id="treatments"
+      className="w-full bg-[#f8fbff] px-4 py-8 sm:px-8 md:py-10 lg:px-12 lg:py-12 xl:px-16"
+    >
       <div className="mx-auto w-full max-w-[1400px]">
 
         {/* Heading */}

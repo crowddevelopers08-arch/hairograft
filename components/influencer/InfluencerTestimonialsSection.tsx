@@ -109,6 +109,9 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] 
   </article>
 );
 
+/** Same Google Business listing the Location section links to. */
+const GOOGLE_REVIEWS_URL = "https://maps.app.goo.gl/as1DmGSFLFYSpb469";
+
 export default function InfluencerTestimonialsSection() {
   // Duplicate testimonials for seamless loop
   const allTestimonials = [...testimonials, ...testimonials, ...testimonials];
@@ -173,7 +176,9 @@ export default function InfluencerTestimonialsSection() {
         {/* Google Reviews Link */}
         <div className="mt-8 flex justify-center">
           <a
-            href="#"
+            href={GOOGLE_REVIEWS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-white/5 px-6 py-3 text-sm font-medium text-white/70 transition-all duration-300 hover:bg-white/10 hover:text-white"
           >
             <GoogleIcon />

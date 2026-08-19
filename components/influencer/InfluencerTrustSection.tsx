@@ -284,9 +284,9 @@ export default function TrustBanner() {
             ))}
           </div>
 
-          {/* CTA */}
-          <button
-            type="button"
+          {/* CTA — jumps to the treatments section. */}
+          <a
+            href="#treatments"
             className="
               relative
               z-10
@@ -294,6 +294,7 @@ export default function TrustBanner() {
               w-fit
               items-center
               gap-[15px]
+              no-underline
               rounded-[4px]
               bg-[#EF3340]
               px-[22px]
@@ -341,7 +342,7 @@ export default function TrustBanner() {
                 xl:w-[18px]
               "
             />
-          </button>
+          </a>
         </div>
 
         {/* =========================================================
