@@ -20,7 +20,7 @@ const DESKTOP_BANNER = {
 } as const;
 
 const MOBILE_BANNER = {
-  src: "/infban.png",
+  src: "/infbanmob.png",
   width: 1080,
   height: 1350,
 } as const;
