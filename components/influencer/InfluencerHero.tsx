@@ -11,7 +11,9 @@ const heroStats = [
 export default function InfluencerHero() {
   return (
     <section
-      className={`relative overflow-hidden px-4 pb-[clamp(48px,8vh,96px)] pt-[clamp(95px,17vh,175px)] sm:px-6 shorter:pt-[clamp(80px,14vh,148px)] ${surface.dark}`}
+      // The old outsized pt was clearance for the fixed navbar; InfluencerImageBanner
+      // now sits above and carries that clearance, so the hero just needs its own rhythm.
+      className={`relative overflow-hidden px-4 pb-[clamp(48px,8vh,96px)] pt-[clamp(48px,8vh,96px)] sm:px-6 ${surface.dark}`}
     >
       {/* Google Maps Background - Interactive with pointer events */}
       <div className="absolute inset-0 z-0 pointer-events-auto">

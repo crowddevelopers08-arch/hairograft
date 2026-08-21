@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import InfluencerNavbar from "@/components/influencer/InfluencerNavbar";
 import InfluencerMobileActionBar from "@/components/influencer/InfluencerMobileActionBar";
+import InfluencerImageBanner from "@/components/influencer/InfluencerImageBanner";
 import InfluencerHero from "@/components/influencer/InfluencerHero";
 import InfluencerTrustSection from "@/components/influencer/InfluencerTrustSection";
 import InfluencerSocialProofSection from "@/components/influencer/InfluencerSocialProofSection";
@@ -31,7 +32,8 @@ export default function InfluencerPage() {
       <InfluencerNavbar />
       <InfluencerMobileActionBar />
 
-      {/* 01 */} <InfluencerHero />
+      {/* 00 */} <InfluencerImageBanner />
+  {/* <InfluencerHero /> */}
       <InfluencerVideoSection />
       {/* 02 */} <InfluencerTrustSection />
       <InfluencerCareCategoriesSection />
